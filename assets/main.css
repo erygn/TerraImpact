@@ -17,19 +17,34 @@ body {
     list-style-type: none;
 }
 
-button {
+.selectElem {
     margin: 0.8rem;
-    padding: 1.8rem;
+    padding: 1rem;
     color: #252525;
     border-radius: 1rem;;
     background-color: #FEFEFE;
-    cursor: pointer;
     transition: all 0.5s ease;
-    width: 100%;
     border: none;
 }
 
-button:hover {
+.chevron {
+    padding: 0 1rem; display: flex; flex-direction: column;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+.selectElemSort {
+    display: flex;
+    align-items: center;
+}
+
+.widthFull {
+    width: 100%;
+}
+
+.selectElem:hover {
     scale: 0.99;
     background-color: #cecece;
 }

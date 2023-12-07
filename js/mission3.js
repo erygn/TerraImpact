@@ -9,15 +9,22 @@ window.onload = (event) => {
     selectQ = document.getElementById("selectQ");
     qShow = document.getElementById("qShow");
 
+    supply()
+};
+
+function supply() {
     qShow.textContent = q[actualId].q
     
     for (let i = 0; i < q[actualId].answer.length; i++) {
         let btn = document.createElement('button');
+        btn.classList.add('selectElem')
+        btn.classList.add('widthFull')
+        btn.classList.add('cursorPointer')
         btn.onclick = function(){answer(i)};
         btn.textContent = q[actualId].answer[i].text;
         selectQ.appendChild(btn)
     }
-};
+}
 
 function answer(id) {
     actualId++;
@@ -31,12 +38,5 @@ function answer(id) {
         selectQ.removeChild(child);
         child = selectQ.lastElementChild;
     }
-    qShow.textContent = q[actualId].q
-    
-    for (let i = 0; i < q[actualId].answer.length; i++) {
-        let btn = document.createElement('button');
-        btn.onclick = function(){answer(i)};
-        btn.textContent = q[actualId].answer[i].text;
-        selectQ.appendChild(btn)
-    }
+    supply()
 }
