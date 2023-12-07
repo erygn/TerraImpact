@@ -15,7 +15,7 @@ window.onload = (event) => {
         let btn = document.createElement('button');
         btn.onclick = function(){answer(i)};
         btn.textContent = q[actualId].answer[i].text;
-        selectQ.appendChild(btn)
+        selectQ.appendChild(btn);
     }
 };
 
