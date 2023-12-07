@@ -1,4 +1,4 @@
-let selectQ = null, qShow = null, actualId = 0, answered = {};
+let selectQ = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, actualId = 0, answered = {};
 let q = [
     {q: 'q1', answer: [{text: 'q1.1', score: 0}, {text: 'q1.2', score: 1}, {text: 'q1.3', score: 2}, {text: 'q1.4', score: 3}]},
     {q: 'q2', answer: [{text: 'q2.1', score: 0}, {text: 'q2.2', score: 0}, {text: 'q2.3', score: 0}]},
@@ -7,6 +7,7 @@ let q = [
 
 window.onload = (event) => {
     selectQ = document.getElementById("selectQ");
+    timer = document.getElementById("timer");
     qShow = document.getElementById("qShow");
 
     supply()
@@ -37,6 +38,7 @@ function supply() {
         div.classList.add('selectElemSort')
         selectQ.appendChild(div)
     }
+    startTimer()
 }
 
 function clear() {
@@ -78,4 +80,25 @@ function down(id) {
     q[actualId].answer[id + 1] = q[actualId].answer[id]
     q[actualId].answer[id] = inter
     supply()
+}
+
+function startTimer() {
+    timer.textContent = "00:30"
+    actualTime = timerQ
+    clearTimeout(timerT)
+    decrement()
+}
+
+function decrement() {
+    if (actualTime == 0) {
+        answer()
+        return;
+    }
+    actualTime--
+    let showTimer = actualTime
+    if (String(actualTime).length == 1) {
+        showTimer = '0' + String(actualTime)
+    }
+    timer.textContent = `00:${showTimer}`
+    timerT = setTimeout(decrement, 1000)
 }
