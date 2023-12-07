@@ -1,0 +1,12 @@
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #FEFEFE;
+}
+
+body {
+    margin: 0; padding: 0; height: 100vh; width: 100vw; background-color: #252525; position: relative; overflow: hidden;
+}
+
+.earth {
+    height: 60vh; width: 60vh; background-color: #FEFEFE; border-radius: 60vh; position: absolute;
+}
