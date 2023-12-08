@@ -85,7 +85,7 @@
             answered[3].push(id)
             if (actualId + 1 > q.length) {
                 clearTimeout(timerT)
-                document.location.href = `final.html?pseudo=${urlGet.get('pseudo')}&time=${urlGet.get('time')}&aw=${JSON.stringify(answered)}&score=${startScore}`;
+                document.location.href = `finish.html?pseudo=${urlGet.get('pseudo')}&time=${urlGet.get('time')}&aw=${JSON.stringify(answered)}&score=${startScore}`;
                 return;
             }
             let child = selectQ.lastElementChild;
