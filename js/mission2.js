@@ -1,8 +1,7 @@
 let selectQ = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, actualId = 0, answered = {};
 let q = [
-    {q: 'q1', answer: [{text: 'q1.1', score: 0}, {text: 'q1.2', score: 1}, {text: 'q1.3', score: 2}, {text: 'q1.4', score: 3}]},
-    {q: 'q2', answer: [{text: 'q2.1', score: 0}, {text: 'q2.2', score: 0}, {text: 'q2.3', score: 0}]},
-    {q: 'q3', answer: [{text: 'q3.1', score: 0}, {text: 'q3.2', score: 0}, {text: 'q3.3', score: 0}]},
+    {q: "Trier les moyens de productions d'électricité du plus propre au moins propre", answer: [{text: 'Charbon', score: 3}, {text: 'Nucléaire', score: 0}, {text: 'Photovoltaïque', score: 1}, {text: 'Gaz naturel', score: 2}]},
+    {q: "Trier les moyens de transport dans l'ordre croissant d'émission de CO2", answer: [{text: 'Bus', score: 1}, {text: 'Train', score: 3}, {text: 'Voiture', score: 2}, {text: 'Train', score: 0}]},
 ]
 
 window.onload = (event) => {
@@ -52,6 +51,7 @@ function clear() {
 function answer() {
     actualId++;
     if (actualId + 1 > q.length) {
+        clearTimeout(timerT)
         console.log('changement page')
         document.location.href = 'mission3.html';
         return;

@@ -1,8 +1,8 @@
-let selectQ = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, actualId = 0, answered = {};
+let selectQ = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, actualId = 0, answered = {}, startScore = 20;
 let q = [
-    {q: 'q1', answer: [{text: 'Vrai', score: 0}, {text: 'Faux', score: 0}]},
-    {q: 'q2', answer: [{text: 'Vrai', score: 0}, {text: 'Faux', score: 0}]},
-    {q: 'q3', answer: [{text: 'Vrai', score: 0}, {text: 'Faux', score: 0}]},
+    {q: 'Est-ce que la déforestation est la seconde cause du réchauffement climatique', answer: [{text: 'Vrai', score: 1}, {text: 'Faux', score: -1}]},
+    {q: "En un jour, un arbre produit-il assez d'oxygène pour 2 personnes ?", answer: [{text: 'Vrai', score: -1}, {text: 'Faux', score: 1}]},
+    {q: "Sur les 10 dernières années, la forêt amazonienne au Brésil à émis plus de carbonne qu'elle n'en a capté", answer: [{text: 'Vrai', score: 1}, {text: 'Faux', score: -1}]},
 ]
 
 window.onload = (event) => {
@@ -53,8 +53,10 @@ function decrement() {
 }
 
 function answer(id) {
+    startScore += q[actualId].answer[id].score
     actualId++;
     if (actualId + 1 > q.length) {
+        clearTimeout(timerT)
         console.log('changement page')
         document.location.href = 'mission2.html';
         return;

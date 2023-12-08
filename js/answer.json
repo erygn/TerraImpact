@@ -1,0 +1,11 @@
+{
+    "mission1": [
+        "La déforestation est bien la 2ème cause, cela produit 24% des gaz à effet de serre.",
+        "En un jour, un arbre est capable de produire de l'oxygène pour 4 personne",
+        "Les pertes sont d'envirion 18% supérieures aux gains."
+    ],
+    "mission2": [
+        "L'émission de Co2 par kWh du nucléaire est de 12g, photovoltaïque 48g, gaz naturel 490g, charbon 820g",
+        "L'émission de Co2 par personne par kilomètre en train est de 3.5g, en bus 20g, en voiture 85g, en avion 145g"
+    ]
+}

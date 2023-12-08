@@ -4,11 +4,11 @@ html {
 }
 
 body {
-    margin: 0; padding: 0; height: 100vh; width: 100vw; background-color: #252525; position: relative; overflow: hidden;
+    margin: 0; padding: 0; height: 100vh; width: 100vw; background-image: linear-gradient(to right top, #051937, #011927, #001f22, #00311e, #2c3f04); position: relative; overflow: hidden;
 }
 
 .earth {
-    height: 60vh; width: 60vh; background-color: #FEFEFE; border-radius: 60vh; position: absolute;
+    height: 60vh; width: 60vh; background-color: #FEFEFE; border-radius: 60vh; position: absolute; bottom: -40%; right: 10%;
 }
 
 #selectQ {

@@ -31,6 +31,7 @@ function supply() {
 function answer(id) {
     actualId++;
     if (actualId + 1 > q.length) {
+        clearTimeout(timerT)
         console.log('changement page')
         document.location.href = 'index.html';
         return;
