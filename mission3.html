@@ -79,10 +79,10 @@
         }
 
         function answer(id) {
+            answered[3].push(q[actualId].answer[id].score)
             startScore += q[actualId].answer[id].score
             earth.style.backgroundColor = randomColor(startScore)
             actualId++;
-            answered[3].push(id)
             if (actualId + 1 > q.length) {
                 clearTimeout(timerT)
                 document.location.href = `finish.html?pseudo=${urlGet.get('pseudo')}&time=${urlGet.get('time')}&aw=${JSON.stringify(answered)}&score=${startScore}`;
