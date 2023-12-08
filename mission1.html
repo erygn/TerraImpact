@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
-    <div class="earth"></div>
+    <div class="earth" id="earth"></div>
     <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
         <div style="width: 80vw; height: 70vh; backdrop-filter: blur(1rem); border-radius: 4rem; display: flex; align-items: center; justify-content: center;">
             <div style="width: 80vw;">
@@ -16,20 +16,48 @@
         </div>
     </div>
     <script>
-        let selectQ = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, actualId = 0, answered = [], startScore = 5;
+        let selectQ = null, earth = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, actualId = 0, answered = [], startScore = 5;
         let q = [
             {q: 'Est-ce que la déforestation est la seconde cause du réchauffement climatique', answer: [{text: 'Vrai', score: 1}, {text: 'Faux', score: -1}]},
             {q: "En un jour, un arbre produit-il assez d'oxygène pour 2 personnes ?", answer: [{text: 'Vrai', score: -1}, {text: 'Faux', score: 1}]},
-            {q: "Sur les 10 dernières années, la forêt amazonienne au Brésil à émis plus de carbonne qu'elle n'en a capté", answer: [{text: 'Vrai', score: 1}, {text: 'Faux', score: -1}]},
+            {q: "Sur les 10 dernières années, la forêt amazonienne au Brésil a émis plus de carbonne qu'elle n'en a capté", answer: [{text: 'Vrai', score: 1}, {text: 'Faux', score: -1}]},
         ]
 
         window.onload = (event) => {
+            earth = document.getElementById('earth')
             selectQ = document.getElementById("selectQ");
             timer = document.getElementById("timer");
             qShow = document.getElementById("qShow");
 
+            earth.style.backgroundColor = randomColor(startScore)
             supply()
         };
+
+        function randomColor(score) {
+            let color = '#120101'
+            if (score == 1) {
+                color = '#290202'
+            } else if (score == 2) {
+                color = '#871e1e'
+            } else if (score == 3) {
+                color = '#944d23'
+            } else if (score == 4) {
+                color = '#947223'
+            } else if (score == 5) {
+                color = '#948523'
+            } else if (score == 6) {
+                color = '#899423'
+            } else if (score == 7) {
+                color = '#709423'
+            } else if (score == 8) {
+                color = '#619423'
+            } else if (score == 9) {
+                color = '#4e9423'
+            } else if (score == 10) {
+                color = '#42bd1c'
+            }
+            return color
+        }
 
         function supply() {
             qShow.textContent = q[actualId].q
@@ -72,6 +100,7 @@
 
         function answer(id) {
             startScore += q[actualId].answer[id].score
+            earth.style.backgroundColor = randomColor(startScore)
             answered.push(id)
             actualId++;
             if (actualId + 1 > q.length) {
