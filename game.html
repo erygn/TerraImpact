@@ -6,8 +6,47 @@
     <div class="earth" style="bottom: -40%; right: 10%;"></div>
     <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
         <div style="width: 80vw; height: 70vh; backdrop-filter: blur(10px); border-radius: 2rem;">
-            <h1>TerraImpact</h1>
+            <h1 onclick="test()">TerraImpact</h1>
         </div>
     </div>
+    <script>
+        let score = 0, pseudo = '', timeEnd = new Date().getTime(), timeTot = 0
+        window.onload = () => {
+            let urlGet = new URLSearchParams(window.location.search);
+            timeTot = parseInt(timeEnd - parseInt(urlGet.get('time'))) / 1000 
+            score = parseInt(urlGet.get('score'));
+            pseudo = urlGet.get('pseudo');
+            sendFile()
+        }
+        async function sendFile() {
+            const response = await fetch("http://terraimpact.back.rakura.fr/addValue", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                "uid": String(pseudo) + String(new Date().getTime()).substring(8),
+                "pseudo": String(pseudo),
+                "score": score,
+                "time": parseInt(timeTot)
+                })
+            });
+
+            response.json().then(data => {
+                console.log(JSON.stringify(data));
+            });
+        }
+        async function test() {
+            const response = await fetch("http://terraimpact.back.rakura.fr/getAll", {
+            method: 'GET'
+            });
+
+            response.json().then(data => {
+                console.log(JSON.stringify(data));
+            });
+        }
+        
+    </script>
 </body>
 </html>

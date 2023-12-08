@@ -19,8 +19,8 @@
     <script>
         let selectQ = null, earth = null, qShow = null, timer = null, timerT = null, timerQ = 30, actualTime = 0, startScore = 0, urlGet = null, actualId = 0, answered = {};
         let q = [
-            {q: "Trier les moyens de productions d'électricité du plus propre au moins propre", answer: [{text: 'Charbon', score: 3}, {text: 'Nucléaire', score: 0}, {text: 'Photovoltaïque', score: 1}, {text: 'Gaz naturel', score: 2}]},
-            {q: "Trier les moyens de transport dans l'ordre croissant d'émission de CO2 par passager par km", answer: [{text: 'Bus', score: 1}, {text: 'Avion', score: 3}, {text: 'Voiture', score: 2}, {text: 'Train', score: 0}]},
+            {q: "Trier les moyens de productions d'électricité du plus propre au moins propre (haut en bas)", answer: [{text: 'Charbon', score: 3}, {text: 'Nucléaire', score: 0}, {text: 'Photovoltaïque', score: 1}, {text: 'Gaz naturel', score: 2}]},
+            {q: "Trier les moyens de transport dans l'ordre croissant d'émission de CO2 par passager par km (haut en bas)", answer: [{text: 'Bus', score: 1}, {text: 'Avion', score: 3}, {text: 'Voiture', score: 2}, {text: 'Train', score: 0}]},
         ]
 
         window.onload = (event) => {
