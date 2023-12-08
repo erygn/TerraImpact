@@ -11,6 +11,18 @@ body {
     height: 60vh; width: 60vh; background-color: #899423; border-radius: 60vh; position: absolute; bottom: -40%; right: 10%;
 }
 
+.main {
+    position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;
+}
+
+.mission {
+    width: 80vw; height: 70vh; backdrop-filter: blur(1rem); border-radius: 4rem; display: flex; align-items: center; justify-content: center;
+}
+
+.blur {
+    padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;
+}
+
 #selectQ {
     margin: 0;
     padding: 0;

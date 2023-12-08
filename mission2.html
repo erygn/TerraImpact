@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <head>
+    <title>TerraImpact</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
     <div class="earth" id="earth"></div>
-    <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
-        <div style="width: 80vw; height: 70vh; backdrop-filter: blur(1rem); border-radius: 4rem; display: flex; align-items: center; justify-content: center;">
-            <div style="width: 80vw;">
+    <div class="main">
+        <div class="mission">
+            <div style="width: 50vw;">
+                <h2>Manche 2 - Trier par ordre croissant</h2>
                 <h1 id="timer"></h1>
                 <p id="qShow">Question</p>
                 <div id="selectQ">
@@ -27,6 +29,11 @@
             earth = document.getElementById('earth')
             urlGet = new URLSearchParams(window.location.search);
             startScore = parseInt(urlGet.get('score'));
+            if (startScore < 0) {
+                startScore = 0
+            } else if (startScore > 10) {
+                startScore = 10
+            }
             answered = JSON.parse(urlGet.get('aw'));
             answered[2] = []
             selectQ = document.getElementById("selectQ");
@@ -70,7 +77,6 @@
                 let div = document.createElement('div'), firstDiv = document.createElement('div'), secondDiv = document.createElement('div'), pSd = document.createElement('p');
                 //secondDiv
                 pSd.textContent = q[actualId].answer[i].text;
-                secondDiv.style.flex = '1';
                 secondDiv.appendChild(pSd);
 
                 //firstDiv

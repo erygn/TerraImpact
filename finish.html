@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <head>
+    <title>TerraImpact</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
     <div class="earth" id="earth"></div>
-    <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
-        <div style="padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;">
+    <div class="main">
+        <div class="blur">
             <h1 id="score"></h1>
             <h3 id="result"></h3>
             <a id="share"></a>
@@ -28,6 +29,11 @@
             falseAw = document.getElementById('falseAw')
             let urlGet = new URLSearchParams(window.location.search);
             score = parseInt(urlGet.get('score'));
+            if (score < 0) {
+                score = 0
+            } else if (score > 10) {
+                score = 10
+            }
             earth.style.backgroundColor = randomColor(score)
             timeTot = parseInt(timeEnd - parseInt(urlGet.get('time'))) / 1000 
             document.getElementById("score").innerText = "Votre score : " + score + "/10 en " + parseInt(timeTot) + "s";

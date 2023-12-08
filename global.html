@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <head>
+    <title>TerraImpact</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
-    <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
-        <div style="padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;">
+    <div class="main">
+        <div class="blur">
             <h1>Classement global</h1>
             <div style="padding: 1rem; border: 2px solid white; border-radius: 2rem; max-height: 80vh; overflow-y: auto;">
                 <div id="classement">
@@ -36,6 +37,7 @@
                     subDiv.appendChild(score)
                     subDiv.appendChild(time)
                     title.textContent = String(i + 1) + ". " + String(data[i].pseudo)
+                    title.style.color = "#FFF"
                     title.href = 'result.html?uid=' + data[i].uid
                     title.title = "Voir la planète"
                     div.appendChild(title)
