@@ -166,7 +166,7 @@
             let uid = String(pseudo) + String(new Date().getTime()).substring(8)
             document.getElementById('share').href = "result.html?uid=" + uid
             document.getElementById('share').textContent = "Copier ce lien pour partager votre résultat"
-            const response = await fetch("http://terraimpact.back.rakura.fr/addValue", {
+            const response = await fetch("https://terraimpact.back.rakura.fr/addValue", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
