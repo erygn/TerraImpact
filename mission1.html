@@ -100,8 +100,13 @@
 
         function answer(id) {
             startScore += q[actualId].answer[id].score
+            if (startScore < 0) {
+                startScore = 0
+            } else if (startScore > 10) {
+                startScore = 10
+            }
             earth.style.backgroundColor = randomColor(startScore)
-            answered.push(id)
+            answered.push(q[actualId].answer[id].score)
             actualId++;
             if (actualId + 1 > q.length) {
                 clearTimeout(timerT)

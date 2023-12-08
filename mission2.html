@@ -118,6 +118,11 @@
             } else if (verifScore == 0) {
                 startScore += -2
             }
+            if (startScore < 0) {
+                startScore = 0
+            } else if (startScore > 10) {
+                startScore = 10
+            }
             earth.style.backgroundColor = randomColor(startScore)
             answered[2].push(aws)
             if (actualId + 1 > q.length) {

@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
-    <div class="earth"></div>
+    <div class="earth" id="earth"></div>
     <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
         <div style="padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;">
             <h1 id="score"></h1>
@@ -18,38 +18,92 @@
         </div>
     </div>
     <script>
-        var urlGet = new URLSearchParams(window.location.search);
-        var score = parseInt(urlGet.get('score'));
-        document.getElementById("score").innerText = "Votre score : " + score;
-        var prefix = "Votre planète est ";
-        var state = "";
-        if (score === 0) {
-            state += délabrée;
-        } else if (score === 1) {
-            state += déclinante;
-        } else if (score === 2) {
-            state += polluée;
-        } else if (score === 3) {
-            state += épuisée;
-        } else if (score === 4) {
-            state += malade;
-        } else if (score === 5) {
-            state += instable;
-        } else if (score === 6) {
-            state += endommagée;
-        } else if (score === 7) {
-            state += fragile;
-        } else if (score === 8) {
-            state += résiliente;
-        } else if (score === 9) {
-            state += revitalisante;
-        } else if (score === 10) {
-            state += florissante;
+        let score = 0, pseudo = '', earth = null, timeEnd = new Date().getTime(), timeTot = 0
+        window.onload = (event) => {
+            earth = document.getElementById('earth')
+            let urlGet = new URLSearchParams(window.location.search);
+            score = parseInt(urlGet.get('score'));
+            earth.style.backgroundColor = randomColor(score)
+            document.getElementById("score").innerText = "Votre score : " + score;
+            var prefix = "Votre planète est ";
+            if (score == 0) {
+                prefix += 'délabrée';
+            } else if (score == 1) {
+                prefix += 'déclinante';
+            } else if (score == 2) {
+                prefix += 'polluée';
+            } else if (score == 3) {
+                prefix += 'épuisée';
+            } else if (score == 4) {
+                prefix += 'malade';
+            } else if (score == 5) {
+                prefix += 'instable';
+            } else if (score == 6) {
+                prefix += 'endommagée';
+            } else if (score == 7) {
+                prefix += 'fragile';
+            } else if (score == 8) {
+                prefix += 'résiliente';
+            } else if (score == 9) {
+                prefix += 'revitalisante';
+            } else if (score == 10) {
+                prefix += 'florissante';
+            }
+            document.getElementById("result").innerText = prefix;
+            var hof = document.getElementById("hof");
+            let table = document.createElement('table');
+            hof.appendChild(table);
+
+            timeTot = parseInt(timeEnd - parseInt(urlGet.get('time'))) / 1000 
+            pseudo = urlGet.get('pseudo');
+            sendFile()
+        };
+
+        function randomColor(score) {
+            let color = '#120101'
+            if (score == 1) {
+                color = '#290202'
+            } else if (score == 2) {
+                color = '#871e1e'
+            } else if (score == 3) {
+                color = '#944d23'
+            } else if (score == 4) {
+                color = '#947223'
+            } else if (score == 5) {
+                color = '#948523'
+            } else if (score == 6) {
+                color = '#899423'
+            } else if (score == 7) {
+                color = '#709423'
+            } else if (score == 8) {
+                color = '#619423'
+            } else if (score == 9) {
+                color = '#4e9423'
+            } else if (score == 10) {
+                color = '#42bd1c'
+            }
+            return color
         }
-        document.getElementById("result").innerText = "test";
-        var hof = document.getElementById("hof");
-        let table = document.createElement('table');
-        hof.appendChild(table);
+
+        async function sendFile() {
+            const response = await fetch("http://terraimpact.back.rakura.fr/addValue", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                "uid": String(pseudo) + String(new Date().getTime()).substring(8),
+                "pseudo": String(pseudo),
+                "score": score,
+                "time": parseInt(timeTot)
+                })
+            });
+
+            response.json().then(data => {
+                console.log(JSON.stringify(data));
+            });
+        }
     </script>
 </body>
 </html>
