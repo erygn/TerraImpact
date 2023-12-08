@@ -7,62 +7,51 @@
     <div class="earth" id="earth"></div>
     <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
         <div style="padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;">
-            <h1 id="score"></h1>
+            <h1 id="title"></h1>
+            <h2 id="score"></h2>
             <h3 id="result"></h3>
-            <a id="share"></a>
-            <div style="padding: 1rem; border: 2px solid white; border-radius: 2rem; max-height: 50vh; overflow-y: auto;">
+            <div style="padding: 1rem; border: 2px solid white; border-radius: 2rem; max-height: 60vh; overflow-y: auto;">
                 <div id="falseAw">
                 </div>
             </div>
-            <div id="hof" style="margin: 5%; border: 2px solid white; border-radius: 2rem;"></div>
-            <div style="margin-bottom: 20px"><a href="global.html">Voir le classement global</a></div>
-            <div><a href="index.html" style="text-decoration: none; margin: 3%; padding: 2% 3%; background-color: white; border-radius: 1rem;">
-                Rejouer
-            </a></div>
+            <a href="global.html">Voir tous les résultats</a>
         </div>
     </div>
     <script>
-        let score = 0, hof = null, pseudo = '', falseAw = null, aw = {}, earth = null, timeEnd = new Date().getTime(), timeTot = 0
+        let uid = null, earth = null, aw = {}, falseAw = null
         window.onload = (event) => {
             earth = document.getElementById('earth')
             falseAw = document.getElementById('falseAw')
             let urlGet = new URLSearchParams(window.location.search);
-            score = parseInt(urlGet.get('score'));
-            earth.style.backgroundColor = randomColor(score)
-            timeTot = parseInt(timeEnd - parseInt(urlGet.get('time'))) / 1000 
-            document.getElementById("score").innerText = "Votre score : " + score + "/10 en " + parseInt(timeTot) + "s";
-            var prefix = "Votre planète est ";
-            if (score == 0) {
-                prefix += 'délabrée';
-            } else if (score == 1) {
-                prefix += 'déclinante';
-            } else if (score == 2) {
-                prefix += 'polluée';
-            } else if (score == 3) {
-                prefix += 'épuisée';
-            } else if (score == 4) {
-                prefix += 'malade';
-            } else if (score == 5) {
-                prefix += 'instable';
-            } else if (score == 6) {
-                prefix += 'endommagée';
-            } else if (score == 7) {
-                prefix += 'fragile';
-            } else if (score == 8) {
-                prefix += 'résiliente';
-            } else if (score == 9) {
-                prefix += 'revitalisante';
-            } else if (score == 10) {
-                prefix += 'florissante';
-            }
-            document.getElementById("result").innerText = prefix;
-            hof = document.getElementById("hof");
-
-            pseudo = urlGet.get('pseudo');
-            aw = JSON.parse(urlGet.get('aw'));
-            falseAnwer()
-            sendFile()
+            uid = urlGet.get('uid');
+            getUser()
         };
+
+        function randomColor(score) {
+            let color = '#120101'
+            if (score == 1) {
+                color = '#290202'
+            } else if (score == 2) {
+                color = '#871e1e'
+            } else if (score == 3) {
+                color = '#944d23'
+            } else if (score == 4) {
+                color = '#947223'
+            } else if (score == 5) {
+                color = '#948523'
+            } else if (score == 6) {
+                color = '#899423'
+            } else if (score == 7) {
+                color = '#709423'
+            } else if (score == 8) {
+                color = '#619423'
+            } else if (score == 9) {
+                color = '#4e9423'
+            } else if (score == 10) {
+                color = '#42bd1c'
+            }
+            return color
+        }
 
         function falseAnwer() {
             let awMsg = {1: [], 2: [], 3: []};
@@ -129,55 +118,51 @@
             })
         }
 
-        function randomColor(score) {
-            let color = '#120101'
-            if (score == 1) {
-                color = '#290202'
-            } else if (score == 2) {
-                color = '#871e1e'
-            } else if (score == 3) {
-                color = '#944d23'
-            } else if (score == 4) {
-                color = '#947223'
-            } else if (score == 5) {
-                color = '#948523'
-            } else if (score == 6) {
-                color = '#899423'
-            } else if (score == 7) {
-                color = '#709423'
-            } else if (score == 8) {
-                color = '#619423'
-            } else if (score == 9) {
-                color = '#4e9423'
-            } else if (score == 10) {
-                color = '#42bd1c'
-            }
-            return color
-        }
-
-        async function sendFile() {
-            let uid = String(pseudo) + String(new Date().getTime()).substring(8)
-            document.getElementById('share').href = "result.html?uid=" + uid
-            document.getElementById('share').textContent = "Copier ce lien pour partager votre résultat"
-            const response = await fetch("http://terraimpact.back.rakura.fr/addValue", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                "uid": uid,
-                "pseudo": String(pseudo),
-                "score": score,
-                "time": parseInt(timeTot),
-                "aw": JSON.stringify(aw)
+        async function getUser() {
+            const response = await fetch("http://terraimpact.back.rakura.fr/get", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                    "uid": String(uid)
                 })
             });
 
             response.json().then(data => {
-                let pos = document.createElement('h3');
-                pos.textContent = "Votre classement " + data.pos + " sur " + data.tot
-                hof.appendChild(pos)
+                document.getElementById('title').textContent = "Résultats de " + data.pseudo
+                document.getElementById('score').textContent = "Score: "+  data.score + "/10 en " + data.time + "s"
+                var prefix = "La planète est ";
+                if (data.score == 0) {
+                    prefix += 'délabrée';
+                } else if (data.score == 1) {
+                    prefix += 'déclinante';
+                } else if (data.score == 2) {
+                    prefix += 'polluée';
+                } else if (data.score == 3) {
+                    prefix += 'épuisée';
+                } else if (data.score == 4) {
+                    prefix += 'malade';
+                } else if (data.score == 5) {
+                    prefix += 'instable';
+                } else if (data.score == 6) {
+                    prefix += 'endommagée';
+                } else if (data.score == 7) {
+                    prefix += 'fragile';
+                } else if (data.score == 8) {
+                    prefix += 'résiliente';
+                } else if (data.score == 9) {
+                    prefix += 'revitalisante';
+                } else if (data.score == 10) {
+                    prefix += 'florissante';
+                }
+                document.getElementById("result").innerText = prefix;
+                earth.style.backgroundColor = randomColor(data.score)
+                aw = JSON.parse(data.aw)
+                falseAnwer()
+            }).catch(e => {
+                document.location.href = 'global.html'
             });
         }
     </script>

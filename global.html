@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="assets/main.css">
+</head>
+<body>
+    <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
+        <div style="padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;">
+            <h1>Classement global</h1>
+            <div style="padding: 1rem; border: 2px solid white; border-radius: 2rem; max-height: 80vh; overflow-y: auto;">
+                <div id="classement">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let classement = null
+        window.onload = (event) => {
+            classement = document.getElementById('classement');
+            getAll()
+        };
+
+        async function getAll() {
+            const response = await fetch("http://terraimpact.back.rakura.fr/getAll", {
+            method: 'GET'
+            });
+
+            response.json().then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    let div = document.createElement('div'), subDiv = document.createElement('div'), title = document.createElement('a'), score = document.createElement('p'), time = document.createElement('p')
+                    score.textContent = data[i].score + '/10'
+                    time.textContent = data[i].time + 's'
+                    subDiv.style.display = 'flex'
+                    subDiv.style.alignItems = 'center';
+                    subDiv.style.justifyContent = 'space-around';
+                    subDiv.appendChild(score)
+                    subDiv.appendChild(time)
+                    title.textContent = String(i + 1) + ". " + String(data[i].pseudo)
+                    title.href = 'result.html?uid=' + data[i].uid
+                    title.title = "Voir la planète"
+                    div.appendChild(title)
+                    div.appendChild(subDiv)
+                    classement.appendChild(div)
+                }
+            });
+        }
+    </script>
+</body>
+</html>
