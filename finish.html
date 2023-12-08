@@ -8,6 +8,7 @@
     <div style="position: absolute; text-align: center; inset: 0; display: flex; align-items: center; justify-content: center;">
         <div style="padding: 2%; margin: 5%; width: 40vw; backdrop-filter: blur(1rem); border-radius: 4rem;">
             <h1 id="score"></h1>
+            <h2 id="result"></h2>
             <div id="hof" style="margin: 5%; border: 2px solid white; border-radius: 2rem;">
                 <h2>Hall of Fame</h2>
             </div>
@@ -20,6 +21,32 @@
         var urlGet = new URLSearchParams(window.location.search);
         var score = parseInt(urlGet.get('score'));
         document.getElementById("score").innerText = "Votre score : " + score;
+        var prefix = "Votre planète est ";
+        var state = "";
+        if (score === 0) {
+            state += délabrée;
+        } else if (score === 1) {
+            state += déclinante;
+        } else if (score === 2) {
+            state += polluée;
+        } else if (score === 3) {
+            state += épuisée;
+        } else if (score === 4) {
+            state += malade;
+        } else if (score === 5) {
+            state += instable;
+        } else if (score === 6) {
+            state += endommagée;
+        } else if (score === 7) {
+            state += fragile;
+        } else if (score === 8) {
+            state += résiliente;
+        } else if (score === 9) {
+            state += revitalisante;
+        } else if (score === 10) {
+            state += florissante;
+        }
+        document.getElementById("result").innerText = "test";
         var hof = document.getElementById("hof");
         let table = document.createElement('table');
         hof.appendChild(table);
