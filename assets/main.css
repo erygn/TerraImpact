@@ -29,6 +29,20 @@ body {
     list-style-type: none;
 }
 
+.global {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.globalDiv {
+    padding: 10px;
+    border-radius: 1rem;
+    background-color: #FFFFFF22;
+    cursor: pointer;
+    margin: 10px 0px;
+}
+
 .selectElem {
     margin: 0.8rem;
     padding: 1rem;

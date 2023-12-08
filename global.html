@@ -8,10 +8,14 @@
     <div class="main">
         <div class="blur">
             <h1>Classement global</h1>
+            <p>Découvrez la planète finale de chacun des participants</p>
             <div style="padding: 1rem; border: 2px solid white; border-radius: 2rem; max-height: 80vh; overflow-y: auto;">
                 <div id="classement">
                 </div>
             </div>
+            <div style="margin-top: 20px;"><a href="index.html" style="text-decoration: none; margin: 3%; padding: 2% 3%; background-color: white; border-radius: 1rem;">
+                Jouer
+            </a></div>
         </div>
     </div>
     <script>
@@ -37,14 +41,48 @@
                     subDiv.appendChild(score)
                     subDiv.appendChild(time)
                     title.textContent = String(i + 1) + ". " + String(data[i].pseudo)
-                    title.style.color = "#FFF"
+                    title.style.color = randomColor(data[i].score);
+                    title.classList.add('global')
                     title.href = 'result.html?uid=' + data[i].uid
                     title.title = "Voir la planète"
+                    div.classList.add('globalDiv')
+                    div.onclick = function(){moveTo(data[i].uid)};
+                    div.title = 'Voir la planète de ' + data[i].pseudo
                     div.appendChild(title)
                     div.appendChild(subDiv)
                     classement.appendChild(div)
                 }
             });
+        }
+
+        function moveTo(uid) {
+            document.location.href = 'result.html?uid=' + uid
+        }
+
+        function randomColor(score) {
+            let color = '#120101'
+            if (score == 1) {
+                color = '#290202'
+            } else if (score == 2) {
+                color = '#871e1e'
+            } else if (score == 3) {
+                color = '#944d23'
+            } else if (score == 4) {
+                color = '#947223'
+            } else if (score == 5) {
+                color = '#948523'
+            } else if (score == 6) {
+                color = '#899423'
+            } else if (score == 7) {
+                color = '#709423'
+            } else if (score == 8) {
+                color = '#619423'
+            } else if (score == 9) {
+                color = '#4e9423'
+            } else if (score == 10) {
+                color = '#42bd1c'
+            }
+            return color
         }
     </script>
 </body>
